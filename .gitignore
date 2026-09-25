@@ -1,0 +1,16 @@
+# Archives & backups
+*.zip
+*.tar.gz
+
+# Operating System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.DS_Store
+
+# Editor / IDE
+.vscode/
+*.swp
+*.swo
+*~

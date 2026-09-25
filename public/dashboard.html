@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- @head -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap">
+<link rel="stylesheet" href="/assets/css/main.css">
+<script src="/assets/js/site.js" defer></script>
+<!-- /@head -->
+<!-- @seo -->
+
+<!-- /@seo -->
+<title>My dashboard | Vaibhav Web Studio</title>
+<meta name="description" content="Your Vaibhav Web Studio client dashboard: projects, status, updates and account.">
+<meta name="robots" content="noindex">
+<script src="/assets/js/config.js" defer></script>
+<script src="/assets/js/forms.js" defer></script>
+<script src="/assets/js/auth.js" defer></script>
+<script src="/assets/js/dashboard.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<!-- @header -->
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Vaibhav Web Studio, home">
+      <img src="/assets/img/brand-96.jpg" alt="" width="38" height="38">
+      <span class="brand-name">Vaibhav<small>Web Studio</small></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Main">
+      <ul>
+        <li><a href="/websites">Websites</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services#process">How it works</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="nav-account" href="/login" data-account-link>Log in</a>
+      <a class="btn btn-primary btn-sm header-cta" href="/start" aria-label="Start Your Website"><span class="cta-long">Start Your Website</span><span class="cta-short" aria-hidden="true">Start</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="menu-icon" aria-hidden="true"></span><span data-menu-label>Menu</span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/websites">Websites</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services#process">How it works</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a class="btn btn-primary btn-block" href="/start">Start Your Website <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost btn-block" href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+      <a class="btn btn-ghost btn-block" href="/login" data-account-link>Log in</a>
+      <p class="mobile-menu-contact"><span>Email: <a href="mailto:vaibhavgaur36@gmail.com">vaibhavgaur36@gmail.com</a></span></p>
+    </div>
+  </div>
+</header>
+<!-- /@header -->
+
+<main id="main" class="dash-page">
+  <div class="container">
+<!-- @auth-disabled -->
+<div class="alert alert-info" data-auth-disabled hidden>
+  <div>
+    <h2 class="h3">Client accounts are coming soon</h2>
+    <p>You don't need an account to start. Send your project through the <a href="/start">Website Planner</a>, or reach me on <a href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">WhatsApp</a>.</p>
+  </div>
+</div>
+<!-- /@auth-disabled -->
+
+    <div class="dash-loading" data-dash-loading role="status">
+      <span class="spinner spinner-dark" aria-hidden="true"></span> Loading your dashboard…
+    </div>
+
+    <div data-dash hidden>
+      <header class="dash-head">
+        <div>
+          <p class="eyebrow">Client dashboard</p>
+          <h1>Hi<span data-user-first></span> <span class="wave" aria-hidden="true">👋</span></h1>
+          <p class="text-muted">Signed in as <strong data-user-email></strong></p>
+        </div>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="/start">✨ Start a new project</a>
+          <button class="btn btn-ghost" type="button" data-logout>Log out</button>
+        </div>
+      </header>
+
+      <div class="alert alert-success" data-dash-notice role="status" hidden><div><p></p></div></div>
+
+      <!-- Project list -->
+      <section data-view="list" aria-labelledby="projects-title">
+        <div class="dash-section-head">
+          <h2 class="h3" id="projects-title">My projects</h2>
+        </div>
+        <div class="alert alert-error" data-projects-error role="alert" hidden>
+          <div><h3>Couldn't load your projects</h3><p data-error-text></p><p><button class="btn btn-ghost btn-sm" type="button" data-retry>Try again</button></p></div>
+        </div>
+        <div class="project-list" data-project-list aria-busy="true">
+          <div class="skeleton"></div><div class="skeleton"></div>
+        </div>
+        <div class="empty-card" data-projects-empty hidden>
+          <div class="empty-emoji" aria-hidden="true">🗂️</div>
+          <h3>No projects yet</h3>
+          <p>Plan your website in about 5 minutes. Once you send it, it will appear here with its status.</p>
+          <a class="btn btn-primary" href="/start">Plan my website <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </section>
+
+      <!-- Project detail -->
+      <section data-view="detail" hidden aria-labelledby="detail-title">
+        <button class="back-link" type="button" data-back-to-list>← All projects</button>
+        <div class="detail-head">
+          <div>
+            <p class="text-muted" data-detail-meta></p>
+            <h2 id="detail-title" tabindex="-1" data-detail-title></h2>
+          </div>
+          <span class="status-pill" data-detail-status></span>
+        </div>
+
+        <div class="detail-grid">
+          <div class="detail-main">
+            <article class="panel">
+              <h3>Progress</h3>
+              <ol class="tracker" data-tracker></ol>
+            </article>
+            <article class="panel panel-accent">
+              <h3>🧭 What happens next</h3>
+              <p data-next-step></p>
+            </article>
+            <article class="panel">
+              <h3>📣 Updates</h3>
+              <ul class="updates" data-updates></ul>
+              <p class="text-muted" data-updates-empty hidden>No updates yet. You'll see messages here as your project moves forward.</p>
+            </article>
+            <article class="panel">
+              <h3>📋 Your requirements</h3>
+              <div class="review" data-requirements></div>
+            </article>
+          </div>
+          <aside class="detail-side">
+            <div class="panel">
+              <h3>Need to change something?</h3>
+              <p class="text-muted">Message me with your project name and I'll update it for you.</p>
+              <div class="stack">
+                <a class="btn btn-primary btn-sm" data-wa-project href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">💬 WhatsApp me</a>
+                <a class="btn btn-ghost btn-sm" data-mail-project href="mailto:vaibhavgaur36@gmail.com">✉️ Email me</a>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <!-- Account -->
+      <section class="account-panel" data-view="list" aria-labelledby="account-title">
+        <h2 class="h3" id="account-title">Account</h2>
+        <div class="grid grid-2">
+          <div class="panel">
+            <h3>Your details</h3>
+            <dl class="kv">
+              <div><dt>Name</dt><dd data-user-name></dd></div>
+              <div><dt>Email</dt><dd data-user-email></dd></div>
+            </dl>
+            <p class="small-print">To change your name or email, <a href="/contact">contact me</a>.</p>
+          </div>
+          <div class="panel">
+            <h3>Change password</h3>
+            <form class="form" data-password-form novalidate>
+              <div class="field">
+                <label for="d-password">New password</label>
+                <input class="input" id="d-password" name="password" type="password" autocomplete="new-password" maxlength="72" aria-describedby="d-password-err">
+                <p class="field-error" id="d-password-err"></p>
+              </div>
+              <div class="field">
+                <label for="d-confirm">Confirm new password</label>
+                <input class="input" id="d-confirm" name="confirm" type="password" autocomplete="new-password" maxlength="72" aria-describedby="d-confirm-err">
+                <p class="field-error" id="d-confirm-err"></p>
+              </div>
+              <p class="form-msg" data-password-msg role="status"></p>
+              <button class="btn btn-ghost" type="submit">Update password</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="alert alert-error" data-dash-fatal role="alert" hidden>
+      <div><h2 class="h3">Your dashboard couldn't load</h2><p data-fatal-text></p><p><a class="btn btn-ghost btn-sm" href="/dashboard">Reload</a></p></div>
+    </div>
+  </div>
+</main>
+
+<!-- @footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="Vaibhav Web Studio, home">
+          <img src="/assets/img/brand-96.jpg" alt="" width="38" height="38" loading="lazy">
+          <span class="brand-name">Vaibhav<small>Web Studio</small></span>
+        </a>
+        <p>Fast, mobile-first websites for small businesses, creators and professionals. Built by Vaibhav Gaur in Ayodhya, UP, for clients across India.</p>
+      </div>
+      <div class="footer-col">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="/websites">Website examples</a></li>
+          <li><a href="/services">Services &amp; pricing</a></li>
+          <li><a href="/services#process">How it works</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/login" data-account-link>Client login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/services#business">Business websites</a></li>
+          <li><a href="/services#landing">Landing pages</a></li>
+          <li><a href="/services#portfolio">Portfolio websites</a></li>
+          <li><a href="/services#ecommerce">Online stores</a></li>
+          <li><a href="/services#custom">Custom projects</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="/start">Plan your website</a></li>
+          <li><a href="mailto:vaibhavgaur36@gmail.com">vaibhavgaur36@gmail.com</a></li>
+          <li><a href="tel:+918595375361">+91 85953 75361</a></li>
+          <li><a href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li>Ayodhya, Uttar Pradesh, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> Vaibhav Web Studio. All rights reserved.</p>
+      <ul>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<!-- /@footer -->
+</body>
+</html>

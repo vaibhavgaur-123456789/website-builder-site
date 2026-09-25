@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!-- @head -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f5f0">
+<link rel="icon" href="/assets/img/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="icon" href="/assets/img/icon-192.png" type="image/png" sizes="192x192">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap">
+<link rel="stylesheet" href="/assets/css/main.css">
+<script src="/assets/js/site.js" defer></script>
+<!-- /@head -->
+<!-- @seo -->
+
+<!-- /@seo -->
+<title>Create an account | Vaibhav Web Studio</title>
+<meta name="description" content="Create a free client account to save your website projects and follow their progress.">
+<meta name="robots" content="noindex">
+<script src="/assets/js/config.js" defer></script>
+<script src="/assets/js/forms.js" defer></script>
+<script src="/assets/js/auth.js" defer></script>
+<script src="/assets/js/account.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<!-- @header -->
+<header class="site-header" data-header>
+  <div class="container header-inner">
+    <a class="brand" href="/" aria-label="Vaibhav Web Studio, home">
+      <img src="/assets/img/brand-96.jpg" alt="" width="38" height="38">
+      <span class="brand-name">Vaibhav<small>Web Studio</small></span>
+    </a>
+    <nav class="nav-desktop" aria-label="Main">
+      <ul>
+        <li><a href="/websites">Websites</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services#process">How it works</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a class="nav-account" href="/login" data-account-link>Log in</a>
+      <a class="btn btn-primary btn-sm header-cta" href="/start" aria-label="Start Your Website"><span class="cta-long">Start Your Website</span><span class="cta-short" aria-hidden="true">Start</span></a>
+      <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
+        <span class="menu-icon" aria-hidden="true"></span><span data-menu-label>Menu</span>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu" data-mobile-menu hidden>
+    <nav aria-label="Mobile">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/websites">Websites</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services#process">How it works</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    <div class="mobile-menu-foot">
+      <a class="btn btn-primary btn-block" href="/start">Start Your Website <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn-ghost btn-block" href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">Chat on WhatsApp</a>
+      <a class="btn btn-ghost btn-block" href="/login" data-account-link>Log in</a>
+      <p class="mobile-menu-contact"><span>Email: <a href="mailto:vaibhavgaur36@gmail.com">vaibhavgaur36@gmail.com</a></span></p>
+    </div>
+  </div>
+</header>
+<!-- /@header -->
+
+<main id="main" class="auth-page">
+  <div class="container auth-shell">
+    <section class="auth-card" aria-labelledby="auth-title">
+      <p class="eyebrow">Free client account</p>
+      <h1 id="auth-title">Create your account</h1>
+      <p class="auth-sub">Save your website plans and follow each project from review to launch.</p>
+
+      <div class="alert" data-auth-status role="alert" tabindex="-1" hidden></div>
+<!-- @auth-disabled -->
+<div class="alert alert-info" data-auth-disabled hidden>
+  <div>
+    <h2 class="h3">Client accounts are coming soon</h2>
+    <p>You don't need an account to start. Send your project through the <a href="/start">Website Planner</a>, or reach me on <a href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">WhatsApp</a>.</p>
+  </div>
+</div>
+<!-- /@auth-disabled -->
+
+      <form class="form" data-auth-form="signup" novalidate>
+        <div class="hp-field" aria-hidden="true"><label>Leave this field empty <input type="text" name="_honey" tabindex="-1" autocomplete="off"></label></div>
+        <div class="field">
+          <label for="s-name">Your name</label>
+          <input class="input" id="s-name" name="name" type="text" autocomplete="name" maxlength="80" required aria-describedby="s-name-err">
+          <p class="field-error" id="s-name-err"></p>
+        </div>
+        <div class="field">
+          <label for="s-email">Email</label>
+          <input class="input" id="s-email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="254" required aria-describedby="s-email-err">
+          <p class="field-error" id="s-email-err"></p>
+        </div>
+        <div class="field">
+          <label for="s-password">Password</label>
+          <div class="pw-wrap">
+            <input class="input" id="s-password" name="password" type="password" autocomplete="new-password" maxlength="72" required aria-describedby="s-password-hint s-password-err">
+            <button class="pw-toggle" type="button" data-toggle-password="password" aria-pressed="false" aria-label="Show password">Show</button>
+          </div>
+          <p class="pw-hint" id="s-password-hint" data-pw-hint>At least 8 characters, with letters and numbers.</p>
+          <p class="field-error" id="s-password-err"></p>
+        </div>
+        <label class="consent">
+          <input type="checkbox" name="terms">
+          <span>I agree to the <a href="/terms" target="_blank" rel="noopener">Terms</a> and <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+        </label>
+        <p class="field-error" data-terms-error></p>
+        <button class="btn btn-primary btn-block" type="submit">Create account</button>
+      </form>
+      <p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+    </section>
+
+    <aside class="auth-aside" aria-label="About accounts">
+      <h2>Why an account?</h2>
+      <ul class="check-list">
+        <li>All your project requests in one dashboard</li>
+        <li>Clear status: review, design, development, launch</li>
+        <li>Updates and next steps from me</li>
+      </ul>
+      <p class="small-print">Your password is stored securely (hashed) by our authentication provider. I never see it.</p>
+    </aside>
+  </div>
+</main>
+
+<!-- @footer -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a class="brand" href="/" aria-label="Vaibhav Web Studio, home">
+          <img src="/assets/img/brand-96.jpg" alt="" width="38" height="38" loading="lazy">
+          <span class="brand-name">Vaibhav<small>Web Studio</small></span>
+        </a>
+        <p>Fast, mobile-first websites for small businesses, creators and professionals. Built by Vaibhav Gaur in Ayodhya, UP, for clients across India.</p>
+      </div>
+      <div class="footer-col">
+        <h2>Explore</h2>
+        <ul>
+          <li><a href="/websites">Website examples</a></li>
+          <li><a href="/services">Services &amp; pricing</a></li>
+          <li><a href="/services#process">How it works</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/login" data-account-link>Client login</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Services</h2>
+        <ul>
+          <li><a href="/services#business">Business websites</a></li>
+          <li><a href="/services#landing">Landing pages</a></li>
+          <li><a href="/services#portfolio">Portfolio websites</a></li>
+          <li><a href="/services#ecommerce">Online stores</a></li>
+          <li><a href="/services#custom">Custom projects</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h2>Contact</h2>
+        <ul>
+          <li><a href="/start">Plan your website</a></li>
+          <li><a href="mailto:vaibhavgaur36@gmail.com">vaibhavgaur36@gmail.com</a></li>
+          <li><a href="tel:+918595375361">+91 85953 75361</a></li>
+          <li><a href="https://wa.me/918595375361" target="_blank" rel="noopener noreferrer">WhatsApp</a></li>
+          <li>Ayodhya, Uttar Pradesh, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© <span data-year>2026</span> Vaibhav Web Studio. All rights reserved.</p>
+      <ul>
+        <li><a href="/privacy">Privacy Policy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<!-- /@footer -->
+</body>
+</html>

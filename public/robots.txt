@@ -3,4 +3,4 @@ Allow: /
 Disallow: /dashboard
 Disallow: /reset-password
 
-Sitemap: https://vaibhavwebstudio.pages.dev/sitemap.xml
+Sitemap: https://website-builder-site.pages.dev/sitemap.xml

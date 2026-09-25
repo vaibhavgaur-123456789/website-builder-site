@@ -31,7 +31,7 @@ Without this step the site still works: projects and messages arrive by email, a
 1. Create a free project at https://supabase.com (region: Mumbai / ap-south-1 is closest).
 2. **SQL Editor → New query**: paste all of `supabase/schema.sql`, then click **Run**.
 3. **Authentication → URL Configuration**
-   - Site URL: your live URL (e.g. `https://vaibhavwebstudio.pages.dev`)
+   - Site URL: your live URL (e.g. `https://website-builder-site.pages.dev`)
    - Redirect URLs: add `https://YOUR-DOMAIN/dashboard` and `https://YOUR-DOMAIN/reset-password`
 4. **Authentication → Providers → Email**: keep *Confirm email* ON. Set minimum password length to 8.
 5. **Authentication → SMTP** (important for production). Supabase's built-in email sender is only for testing and sends very few emails per hour. Connect a free SMTP service (e.g. Brevo or Resend) so confirmation and reset emails arrive reliably.
@@ -58,7 +58,7 @@ Without this step the site still works: projects and messages arrive by email, a
 
 ## 3. Build and deploy
 
-1. Put your real domain in `$SiteUrl` at the top of `tools/build.ps1` (default: `https://vaibhavwebstudio.pages.dev`).
+1. Put your real domain in `$SiteUrl` at the top of `tools/build.ps1` (default: `https://website-builder-site.pages.dev`).
 2. Run: `powershell -ExecutionPolicy Bypass -File tools\build.ps1`
 3. Cloudflare dashboard → **Workers & Pages → Create → Pages → Upload assets** → upload the **`public`** folder.
 4. After launch: add the site to Google Search Console and submit `https://YOUR-DOMAIN/sitemap.xml`.

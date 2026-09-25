@@ -1,0 +1,4 @@
+# Cloudflare Pages configuration: serve only the public/ folder as the website.
+name = "website-builder-site"
+pages_build_output_dir = "./public"
+compatibility_date = "2025-01-01"

@@ -9,7 +9,7 @@
 $ErrorActionPreference = 'Stop'
 
 # >>> Set this to your real domain once it is connected (no trailing slash) <<<
-$SiteUrl = 'https://vaibhavwebstudio.pages.dev'
+$SiteUrl = 'https://website-builder-site.pages.dev'
 
 $root = Split-Path -Parent $PSScriptRoot
 $public = Join-Path $root 'public'

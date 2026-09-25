@@ -59,6 +59,25 @@ $services = @(
 
 $indexable = New-Object System.Collections.Generic.List[string]
 
+# Content hashes for cache-busting CSS/JS (?v=...), so long browser caching is safe
+$versions = @{}
+Get-ChildItem -Path (Join-Path $public 'assets') -Recurse -Include *.css, *.js | ForEach-Object {
+  $rel = '/' + $_.FullName.Substring($public.Length + 1).Replace('\', '/')
+  $versions[$rel] = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.Substring(0, 10).ToLower()
+}
+function Version-Assets([string]$html) {
+  return [regex]::Replace($html, '(/assets/[\w/.-]+\.(?:css|js))(\?v=[0-9a-f]+)?"', {
+    param($m)
+    $path = $m.Groups[1].Value
+    if ($versions.ContainsKey($path)) { "${path}?v=$($versions[$path])`"" } else { $m.Value }
+  })
+}
+
+# Concept demos only need asset versioning
+Get-ChildItem -Path (Join-Path $public 'demos') -Filter *.html | ForEach-Object {
+  [IO.File]::WriteAllText($_.FullName, (Version-Assets ([IO.File]::ReadAllText($_.FullName))), $utf8)
+}
+
 Get-ChildItem -Path $public -Filter *.html | ForEach-Object {
   $file = $_
   $html = [IO.File]::ReadAllText($file.FullName)
@@ -113,6 +132,22 @@ Get-ChildItem -Path $public -Filter *.html | ForEach-Object {
         )
       })
     }
+    if ($slug -eq 'about') {
+      $graph.Add([ordered]@{
+        '@type' = 'ProfilePage'
+        url = $url
+        mainEntity = [ordered]@{
+          '@type' = 'Person'
+          '@id' = "$SiteUrl/about#vaibhav"
+          name = 'Vaibhav Gaur'
+          jobTitle = 'Web developer'
+          image = "$SiteUrl/assets/img/vaibhav-gaur.jpg"
+          worksFor = @{ '@id' = "$SiteUrl/#organization" }
+          address = [ordered]@{ '@type' = 'PostalAddress'; addressLocality = 'Ayodhya'; addressRegion = 'Uttar Pradesh'; addressCountry = 'IN' }
+          knowsAbout = @('Web design', 'Web development', 'Thumbnail design', 'Content creation')
+        }
+      })
+    }
     if ($slug -eq 'services') {
       foreach ($s in $services) {
         $graph.Add([ordered]@{
@@ -142,6 +177,7 @@ Get-ChildItem -Path $public -Filter *.html | ForEach-Object {
   # Mark the current page in navigation
   $navSlug = if ($slug) { "/$slug" } else { '/' }
   $html = $html.Replace('<a href="' + $navSlug + '">', '<a href="' + $navSlug + '" aria-current="page">')
+  $html = Version-Assets $html
 
   [IO.File]::WriteAllText($file.FullName, $html, $utf8)
   Write-Output "Built $($file.Name)$(if ($noindex) { ' (noindex)' })"

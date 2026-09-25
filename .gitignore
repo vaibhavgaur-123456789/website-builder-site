@@ -2,6 +2,12 @@
 *.zip
 *.tar.gz
 
+# Generated single-file preview (rebuild from public/ when needed)
+vaibhav-web-studio-home.html
+
+# Local tooling
+.claude/
+
 # Operating System files
 Thumbs.db
 ehthumbs.db

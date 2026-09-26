@@ -1,0 +1,218 @@
+// Original, hand-written questions on stable, well-established facts (no current affairs, which go stale).
+// Tuple: [stem, options, correctIndex, explanation, difficulty 1-5]
+export type SQ = [string, string[], number, string, number];
+
+export const BANKS: Record<string, SQ[]> = {
+  // ───────────── English ─────────────
+  "eng.synonyms": [
+    ["Choose the synonym of ABUNDANT.", ["Scarce", "Plentiful", "Rare", "Empty"], 1, "Abundant means existing in large quantities, i.e. plentiful.", 1],
+    ["Choose the synonym of CANDID.", ["Frank", "Secretive", "Cunning", "Timid"], 0, "Candid means truthful and straightforward.", 2],
+    ["Choose the synonym of METICULOUS.", ["Careless", "Hasty", "Thorough", "Lazy"], 2, "Meticulous means showing great attention to detail.", 2],
+    ["Choose the synonym of OBSOLETE.", ["Modern", "Outdated", "Useful", "Popular"], 1, "Obsolete means no longer in use.", 1],
+    ["Choose the synonym of BENEVOLENT.", ["Kind", "Cruel", "Greedy", "Angry"], 0, "Benevolent means well-meaning and kindly.", 1],
+    ["Choose the synonym of EPHEMERAL.", ["Permanent", "Short-lived", "Ancient", "Heavy"], 1, "Ephemeral means lasting for a very short time.", 3],
+    ["Choose the synonym of DILIGENT.", ["Industrious", "Idle", "Dull", "Rude"], 0, "Diligent means hard-working and careful.", 1],
+  ],
+  "eng.antonyms": [
+    ["Choose the antonym of VIRTUE.", ["Merit", "Vice", "Honour", "Grace"], 1, "Virtue is moral goodness; its opposite is vice.", 1],
+    ["Choose the antonym of TRANSPARENT.", ["Clear", "Opaque", "Glassy", "Bright"], 1, "Transparent lets light through; opaque does not.", 1],
+    ["Choose the antonym of FRUGAL.", ["Thrifty", "Careful", "Extravagant", "Simple"], 2, "Frugal means economical; extravagant means wasteful.", 2],
+    ["Choose the antonym of HOSTILE.", ["Friendly", "Aggressive", "Angry", "Bitter"], 0, "Hostile means unfriendly.", 1],
+    ["Choose the antonym of CONCEAL.", ["Hide", "Reveal", "Cover", "Mask"], 1, "Conceal means hide; reveal means make known.", 1],
+    ["Choose the antonym of AMBIGUOUS.", ["Vague", "Unclear", "Explicit", "Doubtful"], 2, "Ambiguous means having more than one meaning; explicit is clear.", 2],
+  ],
+  "eng.idioms": [
+    ["Meaning of the idiom: 'To bite the bullet'", ["To eat quickly", "To face a difficult situation bravely", "To hurt someone", "To give up"], 1, "It means to endure something unpleasant with courage.", 2],
+    ["Meaning of the idiom: 'A blessing in disguise'", ["A hidden enemy", "Something good that first seemed bad", "A secret gift", "A religious event"], 1, "An apparent misfortune that turns out well.", 1],
+    ["Meaning of the idiom: 'To burn the midnight oil'", ["To waste resources", "To work late into the night", "To start a fire", "To be angry"], 1, "To study or work late at night.", 1],
+    ["Meaning of the idiom: 'To spill the beans'", ["To reveal a secret", "To cook badly", "To waste food", "To make a mistake"], 0, "To disclose secret information.", 1],
+    ["Meaning of the idiom: 'Once in a blue moon'", ["Every night", "Very rarely", "At midnight", "Monthly"], 1, "Something that happens very rarely.", 1],
+    ["Meaning of the idiom: 'To hit the nail on the head'", ["To be exactly right", "To injure oneself", "To build something", "To be violent"], 0, "To describe exactly what is causing a situation.", 2],
+  ],
+  "eng.oneWord": [
+    ["One word for: 'A person who cannot be corrected'", ["Incorrigible", "Invincible", "Infallible", "Indelible"], 0, "Incorrigible: not able to be corrected or reformed.", 2],
+    ["One word for: 'Study of ancient societies through remains'", ["Anthropology", "Archaeology", "Etymology", "Geology"], 1, "Archaeology studies human history through excavated remains.", 1],
+    ["One word for: 'A speech made without preparation'", ["Extempore", "Monologue", "Soliloquy", "Rhetoric"], 0, "Extempore means spoken without preparation.", 2],
+    ["One word for: 'Fear of heights'", ["Claustrophobia", "Hydrophobia", "Acrophobia", "Xenophobia"], 2, "Acrophobia is an extreme fear of heights.", 1],
+    ["One word for: 'A person who knows everything'", ["Omnipotent", "Omniscient", "Omnipresent", "Omnivorous"], 1, "Omniscient: knowing everything.", 1],
+    ["One word for: 'Government by the people'", ["Autocracy", "Monarchy", "Democracy", "Oligarchy"], 2, "Democracy is rule by the people.", 1],
+  ],
+  "eng.errors": [
+    ["Find the part with an error: (A) Each of the boys / (B) have completed / (C) their homework / (D) No error", ["A", "B", "C", "D"], 1, "'Each' is singular, so it takes 'has completed'.", 2],
+    ["Find the part with an error: (A) She is senior / (B) than me / (C) in the office / (D) No error", ["A", "B", "C", "D"], 1, "'Senior' takes 'to', not 'than': 'senior to me'.", 2],
+    ["Find the part with an error: (A) Neither the teacher / (B) nor the students / (C) was present / (D) No error", ["A", "B", "C", "D"], 2, "With neither…nor, the verb agrees with the nearer subject ('students'), so 'were'.", 3],
+    ["Find the part with an error: (A) I have been living / (B) here since / (C) five years / (D) No error", ["A", "B", "C", "D"], 2, "Use 'for' with a period of time: 'for five years'.", 1],
+    ["Find the part with an error: (A) The furniture / (B) in the room / (C) are expensive / (D) No error", ["A", "B", "C", "D"], 2, "'Furniture' is uncountable and singular, so 'is expensive'.", 2],
+  ],
+  "eng.fillers": [
+    ["He has been ill ____ Monday.", ["from", "since", "for", "by"], 1, "'Since' marks a point in time.", 1],
+    ["The committee ____ divided in their opinions.",["is", "are", "were", "have"], 2, "When members act individually, a collective noun takes a plural verb: 'were divided'.", 3],
+    ["She prefers tea ____ coffee.", ["than", "over", "to", "from"], 2, "'Prefer' is followed by 'to'.", 1],
+    ["If I ____ you, I would accept the offer.", ["am", "was", "were", "be"], 2, "Subjunctive mood uses 'were' for hypothetical situations.", 2],
+    ["The train had left ____ we reached the station.", ["before", "after", "until", "since"], 0, "Past perfect 'had left' happened before 'reached'.", 1],
+    ["He is good ____ mathematics.", ["in", "at", "on", "with"], 1, "'Good at' a subject or skill.", 1],
+  ],
+  "eng.voice": [
+    ["Change to passive: 'The chef cooked a delicious meal.'", ["A delicious meal was cooked by the chef.", "A delicious meal is cooked by the chef.", "A delicious meal had been cooked by the chef.", "The chef was cooked a meal."], 0, "Simple past active → 'was/were + past participle'.", 1],
+    ["Change to passive: 'They are building a bridge.'", ["A bridge is built by them.", "A bridge is being built by them.", "A bridge was being built by them.", "A bridge has been built by them."], 1, "Present continuous → 'is being + past participle'.", 2],
+    ["Change to active: 'The letter will be posted by Ravi.'", ["Ravi posts the letter.", "Ravi will post the letter.", "Ravi would post the letter.", "Ravi has posted the letter."], 1, "Future passive → future active: 'will post'.", 1],
+    ["Change to passive: 'Who wrote this book?'", ["By whom was this book written?", "Who was written this book?", "By whom this book was written?", "This book was written by who?"], 0, "Interrogative 'who' becomes 'by whom' with question word order.", 3],
+  ],
+  "eng.narration": [
+    ["Indirect speech: He said, 'I am tired.'", ["He said that he is tired.", "He said that he was tired.", "He said that I was tired.", "He told that he is tired."], 1, "Reporting verb in past → 'am' becomes 'was', 'I' becomes 'he'.", 1],
+    ["Indirect speech: She said to me, 'Please help me.'", ["She requested me to help her.", "She said me to help her.", "She told that please help her.", "She requested that I help me."], 0, "Requests use 'requested + to-infinitive'.", 2],
+    ["Indirect speech: He said, 'The sun rises in the east.'", ["He said that the sun rose in the east.", "He said that the sun rises in the east.", "He said that the sun had risen in the east.", "He says the sun rose in the east."], 1, "Universal truths keep their present tense.", 2],
+  ],
+  "eng.spelling": [
+    ["Choose the correctly spelt word.", ["Accomodation", "Accommodation", "Acommodation", "Accommadation"], 1, "Accommodation has double 'c' and double 'm'.", 2],
+    ["Choose the correctly spelt word.", ["Occurrence", "Occurence", "Ocurrence", "Occurance"], 0, "Occurrence: double 'c', double 'r', '-ence'.", 2],
+    ["Choose the correctly spelt word.", ["Embarass", "Embarrass", "Emberrass", "Embaras"], 1, "Embarrass: double 'r' and double 's'.", 2],
+    ["Choose the correctly spelt word.", ["Necessary", "Neccessary", "Necesary", "Neccesary"], 0, "Necessary: one 'c', double 's'.", 1],
+  ],
+  "eng.improvement": [
+    ["Improve the underlined part: 'He did not know where *was the station*.'", ["the station was", "is the station", "the station is", "No improvement"], 0, "Indirect questions use statement order: 'where the station was'.", 2],
+    ["Improve the underlined part: 'I am *looking forward to meet* you.'", ["looking forward to meeting", "looking forward for meeting", "looking forward meet", "No improvement"], 0, "'Look forward to' takes a gerund: 'meeting'.", 2],
+    ["Improve the underlined part: 'Hardly *had he reached* when it rained.'", ["he had reached", "did he reach", "he reached", "No improvement"], 3, "'Hardly had he…' inversion is correct.", 3],
+  ],
+  "eng.reading": [
+    ["Passage: 'Regular revision strengthens memory because each recall makes the neural pathway easier to reactivate. Spacing revisions over increasing intervals is more effective than cramming the same hours into one night.' — According to the passage, why is spaced revision effective?", ["It takes fewer hours", "Each recall makes later recall easier", "It avoids difficult topics", "It replaces practice tests"], 1, "The passage says each recall makes the pathway easier to reactivate.", 2],
+    ["Passage (same as above): What does the passage compare spaced revision with?", ["Group study", "Cramming in one night", "Reading novels", "Taking notes"], 1, "It contrasts spacing with cramming the same hours into one night.", 1],
+    ["Passage (same as above): The word 'reactivate' most nearly means:", ["Destroy", "Bring back into use", "Create for the first time", "Ignore"], 1, "Re-activate: make active again.", 1],
+  ],
+  "eng.parajumble": [
+    ["Arrange: P) he opened his books  Q) After dinner  R) and revised till ten  S) he rested for a while and", ["QSPR", "QPSR", "SPQR", "PQRS"], 0, "After dinner (Q) he rested for a while and (S) he opened his books (P) and revised till ten (R).", 2],
+    ["Arrange: P) the results were announced  Q) After weeks of waiting  R) and she had cleared the exam  S) finally", ["QSPR", "SQPR", "QPRS", "PRQS"], 0, "Q-S-P-R reads: After weeks of waiting, finally the results were announced and she had cleared the exam.", 2],
+  ],
+
+  // ───────────── History ─────────────
+  "gk.ancient": [
+    ["The Indus Valley city known for its Great Bath is:", ["Harappa", "Mohenjo-daro", "Lothal", "Kalibangan"], 1, "The Great Bath was excavated at Mohenjo-daro.", 1],
+    ["Who founded the Maurya Empire?", ["Ashoka", "Bindusara", "Chandragupta Maurya", "Samudragupta"], 2, "Chandragupta Maurya founded the empire around 321 BCE.", 1],
+    ["Gautama Buddha delivered his first sermon at:", ["Bodh Gaya", "Sarnath", "Kushinagar", "Lumbini"], 1, "The first sermon was at Sarnath, near Varanasi.", 1],
+    ["Which ruler is known for the Kalinga War?", ["Ashoka", "Chandragupta II", "Harsha", "Kanishka"], 0, "Ashoka fought the Kalinga War and then embraced Buddhism.", 1],
+    ["The Gupta ruler called the 'Napoleon of India' is:", ["Chandragupta I", "Samudragupta", "Skandagupta", "Kumaragupta"], 1, "Historian V. A. Smith called Samudragupta the Napoleon of India.", 2],
+  ],
+  "gk.medieval": [
+    ["The First Battle of Panipat (1526) was fought between Babur and:", ["Rana Sanga", "Ibrahim Lodi", "Hemu", "Sher Shah Suri"], 1, "Babur defeated Ibrahim Lodi and founded Mughal rule.", 1],
+    ["Who began the construction of the Qutub Minar?",["Iltutmish", "Qutb-ud-din Aibak", "Alauddin Khilji", "Balban"], 1, "Qutb-ud-din Aibak began it; Iltutmish completed it.", 2],
+    ["The Mughal emperor who introduced Din-i-Ilahi was:", ["Babur", "Humayun", "Akbar", "Aurangzeb"], 2, "Akbar introduced Din-i-Ilahi in 1582.", 1],
+    ["The Vijayanagara Empire's capital was:", ["Hampi", "Madurai", "Warangal", "Bidar"], 0, "Hampi (Vijayanagara) was the capital.", 1],
+    ["Who built the Taj Mahal?", ["Akbar", "Jahangir", "Shah Jahan", "Aurangzeb"], 2, "Shah Jahan built it in memory of Mumtaz Mahal.", 1],
+  ],
+  "gk.modern": [
+    ["The Indian National Congress was founded in:", ["1857", "1885", "1905", "1920"], 1, "Founded in 1885 in Bombay.", 1],
+    ["The Jallianwala Bagh massacre took place in:", ["1915", "1919", "1922", "1930"], 1, "It occurred on 13 April 1919 in Amritsar.", 1],
+    ["The Dandi March (Salt Satyagraha) began in:", ["1920", "1928", "1930", "1942"], 2, "Gandhi began the march on 12 March 1930.", 1],
+    ["The Quit India Movement was launched in:", ["1939", "1942", "1945", "1947"], 1, "Launched on 8 August 1942.", 1],
+    ["Who gave the slogan 'Swaraj is my birthright'?", ["Gopal Krishna Gokhale", "Bal Gangadhar Tilak", "Lala Lajpat Rai", "Bipin Chandra Pal"], 1, "Bal Gangadhar Tilak.", 1],
+    ["The partition of Bengal was announced in 1905 by:", ["Lord Curzon", "Lord Minto", "Lord Ripon", "Lord Dalhousie"], 0, "Viceroy Lord Curzon.", 2],
+  ],
+  "gk.polity": [
+    ["The Constitution of India came into force on:", ["15 August 1947", "26 November 1949", "26 January 1950", "2 October 1950"], 2, "Adopted 26 Nov 1949, in force 26 Jan 1950.", 1],
+    ["Fundamental Rights are in which Part of the Constitution?", ["Part II", "Part III", "Part IV", "Part V"], 1, "Part III (Articles 12–35).", 1],
+    ["Directive Principles of State Policy are borrowed from the constitution of:", ["USA", "UK", "Ireland", "Canada"], 2, "The DPSP were inspired by the Irish Constitution.", 2],
+    ["Article 21 guarantees:", ["Right to equality", "Protection of life and personal liberty", "Freedom of religion", "Right to education"], 1, "Article 21: protection of life and personal liberty.", 1],
+    ["Who is the ex-officio Chairman of the Rajya Sabha?", ["President", "Vice-President", "Prime Minister", "Speaker"], 1, "The Vice-President chairs the Rajya Sabha.", 1],
+    ["The minimum age to become a member of the Lok Sabha is:", ["18", "21", "25", "30"], 2, "Article 84: 25 years for the Lok Sabha.", 1],
+    ["Which Article deals with the President's Rule in states?", ["Article 352", "Article 356", "Article 360", "Article 370"], 1, "Article 356: failure of constitutional machinery in states.", 2],
+    ["Right to Constitutional Remedies is Article:", ["19", "21", "32", "44"], 2, "Article 32; Ambedkar called it the heart and soul of the Constitution.", 1],
+  ],
+  "gk.geography": [
+    ["The longest river flowing entirely within India is:", ["Godavari", "Ganga", "Krishna", "Narmada"], 1, "The Ganga is the longest river in India.", 1],
+    ["The Tropic of Cancer does NOT pass through which state?", ["Rajasthan", "Odisha", "Jharkhand", "Tripura"], 1, "It passes through 8 states including Rajasthan, Jharkhand and Tripura, but not Odisha.", 3],
+    ["Which is the largest state of India by area?", ["Madhya Pradesh", "Maharashtra", "Rajasthan", "Uttar Pradesh"], 2, "Rajasthan is the largest by area.", 1],
+    ["Black soil is most suitable for growing:", ["Rice", "Cotton", "Tea", "Wheat"], 1, "Black (regur) soil retains moisture, which suits cotton.", 1],
+    ["The Palk Strait separates India from:", ["Maldives", "Sri Lanka", "Myanmar", "Bangladesh"], 1, "It lies between Tamil Nadu and Sri Lanka.", 1],
+    ["The highest peak located in India is:", ["Nanda Devi", "Kangchenjunga", "Kamet", "Anamudi"], 1, "Kangchenjunga (8,586 m) is the highest peak located in India.", 2],
+    ["Which planet is known as the Red Planet?", ["Venus", "Mars", "Jupiter", "Mercury"], 1, "Iron oxide on its surface gives Mars its red colour.", 1],
+    ["Which layer of the atmosphere contains the ozone layer?", ["Troposphere", "Stratosphere", "Mesosphere", "Thermosphere"], 1, "Most ozone is in the stratosphere.", 1],
+  ],
+  "gk.economics": [
+    ["Which body sets India's repo rate?", ["SEBI", "Finance Ministry", "Reserve Bank of India", "NITI Aayog"], 2, "The RBI's Monetary Policy Committee sets the repo rate.", 1],
+    ["GDP measures:", ["Total value of final goods and services produced within a country", "Total exports", "Government revenue", "Money supply"], 0, "GDP is the market value of final goods and services produced within borders.", 1],
+    ["Inflation means:", ["Fall in general price level", "Rise in general price level", "Rise in unemployment", "Fall in money supply"], 1, "Inflation is a sustained rise in the general price level.", 1],
+    ["GST in India was implemented from:", ["1 April 2016", "1 July 2017", "1 January 2018", "1 April 2019"], 1, "GST came into effect on 1 July 2017.", 1],
+    ["Which is a direct tax?", ["GST", "Customs duty", "Income tax", "Excise duty"], 2, "Income tax is levied directly on the person earning.", 1],
+    ["The Planning Commission was replaced by NITI Aayog in:", ["2014", "2015", "2016", "2017"], 1, "NITI Aayog was formed on 1 January 2015.", 2],
+  ],
+  "gk.static": [
+    ["The national aquatic animal of India is:", ["Dolphin (Gangetic)", "Crocodile", "Turtle", "Whale"], 0, "The Gangetic river dolphin was declared the national aquatic animal in 2009.", 2],
+    ["Kathakali is a classical dance form of:", ["Tamil Nadu", "Kerala", "Odisha", "Andhra Pradesh"], 1, "Kathakali is from Kerala.", 1],
+    ["The headquarters of the United Nations is in:", ["Geneva", "Paris", "New York", "Vienna"], 2, "UN headquarters is in New York.", 1],
+    ["Who wrote 'Gitanjali'?", ["Premchand", "Rabindranath Tagore", "Sarojini Naidu", "Bankim Chandra Chatterjee"], 1, "Tagore won the 1913 Nobel Prize in Literature for Gitanjali.", 1],
+    ["The Durand Cup is associated with:", ["Cricket", "Hockey", "Football", "Tennis"], 2, "The Durand Cup is a football tournament.", 1],
+    ["Which is the smallest state of India by area?", ["Sikkim", "Goa", "Tripura", "Manipur"], 1, "Goa is the smallest state by area.", 1],
+  ],
+
+  // ───────────── General Science ─────────────
+  "gs.mechanics": [
+    ["The SI unit of force is:", ["Joule", "Newton", "Watt", "Pascal"], 1, "Force is measured in newtons (kg·m/s²).", 1],
+    ["Newton's first law is also called the law of:", ["Acceleration", "Inertia", "Action-reaction", "Gravitation"], 1, "A body continues in its state unless acted on by a force (inertia).", 1],
+    ["Acceleration due to gravity on Earth is about:", ["9.8 m/s²", "8.9 m/s²", "10.8 m/s²", "6.6 m/s²"], 0, "g ≈ 9.8 m/s² near the Earth's surface.", 1],
+    ["Work done is zero when force and displacement are:", ["Parallel", "Perpendicular", "Opposite", "Equal"], 1, "W = Fd cos θ, and cos 90° = 0.", 2],
+    ["The unit of power is:", ["Joule", "Newton", "Watt", "Volt"], 2, "Power is work per unit time, measured in watts (J/s).", 1],
+  ],
+  "gs.electricity": [
+    ["Ohm's law states that (at constant temperature):", ["V = I/R", "V = IR", "V = R/I", "V = I²R"], 1, "Voltage equals current times resistance.", 1],
+    ["The SI unit of electric current is:", ["Volt", "Ohm", "Ampere", "Coulomb"], 2, "Current is measured in amperes.", 1],
+    ["Resistors of 4 Ω and 12 Ω in parallel give an equivalent resistance of:", ["16 Ω", "3 Ω", "8 Ω", "48 Ω"], 1, "1/R = 1/4 + 1/12 = 4/12 → R = 3 Ω.", 2],
+    ["A fuse wire should have:", ["High resistance and low melting point", "Low resistance and high melting point", "High resistance and high melting point", "Low resistance and low melting point"], 0, "It must heat up and melt quickly when excess current flows.", 2],
+    ["1 kilowatt-hour equals:", ["3.6 × 10⁶ J", "3.6 × 10³ J", "1000 J", "36 × 10⁶ J"], 0, "1 kWh = 1000 W × 3600 s = 3.6 × 10⁶ J.", 2],
+    ["Which device converts mechanical energy into electrical energy?", ["Electric motor", "Generator", "Transformer", "Battery"], 1, "A generator converts mechanical energy into electrical energy.", 1],
+  ],
+  "gs.optics": [
+    ["The speed of light in vacuum is about:", ["3 × 10⁸ m/s", "3 × 10⁶ m/s", "3 × 10⁵ m/s", "3 × 10¹⁰ m/s"], 0, "c ≈ 3 × 10⁸ m/s.", 1],
+    ["A concave lens is used to correct:", ["Hypermetropia", "Myopia", "Presbyopia", "Astigmatism"], 1, "Myopia (short-sightedness) is corrected with a diverging (concave) lens.", 2],
+    ["Sound cannot travel through:", ["Solids", "Liquids", "Gases", "Vacuum"], 3, "Sound needs a medium to travel.", 1],
+    ["The splitting of white light into colours is called:", ["Reflection", "Dispersion", "Diffraction", "Polarisation"], 1, "A prism disperses white light into a spectrum.", 1],
+  ],
+  "gs.chemistry": [
+    ["The chemical formula of common salt is:", ["NaCl", "KCl", "Na₂CO₃", "NaHCO₃"], 0, "Sodium chloride: NaCl.", 1],
+    ["The pH of pure water at 25 °C is:", ["0", "7", "14", "1"], 1, "Neutral water has pH 7.", 1],
+    ["Which gas is most abundant in the Earth's atmosphere?", ["Oxygen", "Carbon dioxide", "Nitrogen", "Argon"], 2, "Nitrogen makes up about 78% of the atmosphere.", 1],
+    ["Baking soda is chemically:", ["Sodium carbonate", "Sodium bicarbonate", "Calcium carbonate", "Sodium hydroxide"], 1, "Baking soda is sodium hydrogen carbonate (NaHCO₃).", 1],
+    ["The atomic number of carbon is:", ["6", "8", "12", "14"], 0, "Carbon has 6 protons.", 1],
+    ["Rusting of iron requires:", ["Only oxygen", "Only water", "Oxygen and water", "Carbon dioxide"], 2, "Iron rusts in the presence of both oxygen and moisture.", 1],
+    ["Which is a noble gas?", ["Hydrogen", "Neon", "Nitrogen", "Chlorine"], 1, "Neon is in Group 18 (noble gases).", 1],
+    ["Vinegar contains which acid?", ["Citric acid", "Acetic acid", "Lactic acid", "Tartaric acid"], 1, "Vinegar is dilute acetic (ethanoic) acid.", 1],
+  ],
+  "gs.biology": [
+    ["The powerhouse of the cell is the:", ["Nucleus", "Ribosome", "Mitochondria", "Golgi body"], 2, "Mitochondria produce ATP through respiration.", 1],
+    ["Deficiency of vitamin C causes:", ["Rickets", "Scurvy", "Night blindness", "Beriberi"], 1, "Scurvy results from a lack of vitamin C.", 1],
+    ["The largest organ of the human body is the:", ["Liver", "Skin", "Brain", "Lungs"], 1, "Skin is the largest organ.", 1],
+    ["Photosynthesis takes place in the:", ["Mitochondria", "Chloroplast", "Nucleus", "Vacuole"], 1, "Chloroplasts contain chlorophyll.", 1],
+    ["Insulin is produced by the:", ["Liver", "Pancreas", "Kidney", "Thyroid"], 1, "Beta cells of the pancreas secrete insulin.", 1],
+    ["The universal blood donor group is:", ["A", "B", "AB", "O negative"], 3, "O negative lacks A, B and Rh antigens.", 2],
+    ["How many chambers does the human heart have?", ["2", "3", "4", "5"], 2, "Two atria and two ventricles.", 1],
+    ["Malaria is caused by:", ["Bacteria", "Virus", "Plasmodium (protozoan)", "Fungus"], 2, "Plasmodium, transmitted by female Anopheles mosquitoes.", 1],
+  ],
+
+  // ───────────── Reasoning (static) ─────────────
+  "rsn.syllogism": [
+    ["Statements: All pens are books. All books are bags. Conclusions: I. All pens are bags. II. Some bags are pens.", ["Only I follows", "Only II follows", "Both follow", "Neither follows"], 2, "Pens ⊂ books ⊂ bags, so all pens are bags, and therefore some bags are pens.", 2],
+    ["Statements: Some cats are dogs. No dog is a rat. Conclusions: I. Some cats are not rats. II. All rats are cats.", ["Only I follows", "Only II follows", "Both follow", "Neither follows"], 0, "The cats that are dogs cannot be rats, so I follows. II has no support.", 3],
+    ["Statements: No apple is a mango. All mangoes are fruits. Conclusions: I. No apple is a fruit. II. Some fruits are not apples.", ["Only I follows", "Only II follows", "Both follow", "Neither follows"], 1, "Mangoes are fruits but not apples, so some fruits are not apples.", 3],
+    ["Statements: All roses are flowers. Some flowers are red. Conclusions: I. Some roses are red. II. All flowers are roses.", ["Only I follows", "Only II follows", "Both follow", "Neither follows"], 3, "The red flowers need not include roses, and II reverses the first statement.", 2],
+  ],
+  "rsn.blood": [
+    ["Pointing to a man, Riya said, 'He is the son of my grandfather's only son.' How is the man related to Riya?", ["Cousin", "Brother", "Uncle", "Father"], 1, "Grandfather's only son is Riya's father, so his son is her brother.", 2],
+    ["A is B's sister. C is B's mother. D is C's father. How is A related to D?", ["Granddaughter", "Daughter", "Niece", "Sister"], 0, "A is C's daughter, and C is D's child, so A is D's granddaughter.", 2],
+    ["If P is the brother of Q and Q is the daughter of R, how is P related to R?", ["Father", "Son", "Nephew", "Brother"], 1, "P is a sibling of R's daughter and male, so R's son.", 1],
+    ["X's mother is the only daughter of Y's grandfather. How is Y related to X (if Y is male)?", ["Brother", "Cousin", "Uncle", "Brother or maternal uncle"], 3, "X's mother is the only daughter of Y's grandfather. Y is either X's brother (same mother) or X's mother's brother (maternal uncle).", 4],
+  ],
+  "rsn.inequality": [
+    ["Statements: A > B ≥ C = D. Conclusions: I. A > D  II. B > D", ["Only I", "Only II", "Both", "Neither"], 0, "A > B ≥ D gives A > D. B ≥ D does not guarantee B > D.", 2],
+    ["Statements: P ≤ Q < R > S. Conclusions: I. P < R  II. Q > S", ["Only I", "Only II", "Both", "Neither"], 0, "P ≤ Q < R gives P < R. Q and S are not comparable.", 2],
+    ["Statements: M = N ≥ O > P. Conclusions: I. M > P  II. N ≥ P", ["Only I", "Only II", "Both", "Neither"], 2, "M = N ≥ O > P gives M > P, and N > P implies N ≥ P.", 3],
+    ["Statements: W < X ≤ Y = Z. Conclusions: I. Z > W  II. X = Z", ["Only I", "Only II", "Both", "Neither"], 0, "W < X ≤ Z gives Z > W. X may be less than Z.", 2],
+  ],
+  "rsn.venn": [
+    ["Which diagram best represents: Doctors, Men, Surgeons?", ["Three separate circles", "Surgeons inside Doctors; Doctors overlaps Men", "All three identical", "Men inside Surgeons"], 1, "All surgeons are doctors. Some doctors are men.", 2],
+    ["Which set is represented by one circle entirely inside another: Mammals, Dogs?", ["Dogs inside Mammals", "Mammals inside Dogs", "Separate", "Overlapping"], 0, "All dogs are mammals.", 1],
+    ["Which relationship fits: India, Delhi, Asia?", ["Delhi ⊂ India ⊂ Asia", "India ⊂ Delhi ⊂ Asia", "Separate", "Asia ⊂ India"], 0, "A city within a country within a continent.", 1],
+  ],
+  "rsn.seating": [
+    ["Five friends sit in a row facing north. B is to the immediate right of A. C is at the left end. D is between C and A. Who is at the right end?", ["B", "E", "A", "D"], 1, "C, D, A, B fill positions 1–4, so E is at the right end.", 3],
+    ["Four people sit around a square table facing the centre. P is opposite R. Q is to the immediate left of P. Who is to the immediate right of P?", ["Q", "R", "S", "Cannot be determined"], 2, "Q is on P's left and R is opposite, so S is on P's right.", 3],
+  ],
+};

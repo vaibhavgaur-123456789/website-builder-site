@@ -12,6 +12,6 @@ window.VWS_CONFIG = Object.freeze({
   email: "vaibhavgaur36@gmail.com",
   whatsapp: "918595375361",
   phoneDisplay: "+91 85953 75361",
-  supabaseUrl: "",
-  supabaseAnonKey: ""
+  supabaseUrl: "https://ioekjezivvesclpgfhbj.supabase.co",
+  supabaseAnonKey: "sb_publishable_AgQNler4fTmPZxoXeU6YWA_sywXS5Z3"
 });

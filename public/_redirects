@@ -1,0 +1,2 @@
+# Serve the Google Search Console verification file at its exact .html URL (no 308 to the extensionless path)
+/googlecb125d6a7061e0c4.html  /google-site-verification.txt  200

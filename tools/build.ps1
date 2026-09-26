@@ -78,7 +78,8 @@ Get-ChildItem -Path (Join-Path $public 'demos') -Filter *.html | ForEach-Object 
   [IO.File]::WriteAllText($_.FullName, (Version-Assets ([IO.File]::ReadAllText($_.FullName))), $utf8)
 }
 
-Get-ChildItem -Path $public -Filter *.html | ForEach-Object {
+# Search-engine verification files (e.g. google123abc.html) are copied as-is, never processed
+Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^google[0-9a-f]+\.html$' } | ForEach-Object {
   $file = $_
   $html = [IO.File]::ReadAllText($file.FullName)
   $slug = if ($file.BaseName -eq 'index') { '' } else { $file.BaseName }

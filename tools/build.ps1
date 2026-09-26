@@ -125,7 +125,7 @@ Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^
     $graph = New-Object System.Collections.Generic.List[object]
     if (-not $slug) {
       $graph.Add($org)
-      $graph.Add([ordered]@{ '@type' = 'WebSite'; '@id' = "$SiteUrl/#website"; url = "$SiteUrl/"; name = 'Vaibhav Web Studio'; publisher = @{ '@id' = "$SiteUrl/#organization" }; inLanguage = 'en-IN' })
+      $graph.Add([ordered]@{ '@type' = 'WebSite'; '@id' = "$SiteUrl/#website"; url = "$SiteUrl/"; name = 'Vaibhav Web Studio'; alternateName = @('Vaibhav Gaur Web Studio', 'VWS'); publisher = @{ '@id' = "$SiteUrl/#organization" }; inLanguage = 'en-IN' })
     }
     if ($breadcrumbNames.ContainsKey($slug)) {
       $graph.Add([ordered]@{

@@ -43,6 +43,11 @@
   }
 
   var hash = Auth.captureHash();
+  // An expired or already-used email link: explain it on the login page instead of failing silently
+  if (hash.type === "error") {
+    window.location.replace("/login?reason=link");
+    return;
+  }
 
   function notice(text) {
     var box = $("[data-dash-notice]");

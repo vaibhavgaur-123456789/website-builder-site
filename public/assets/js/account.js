@@ -83,6 +83,7 @@
 
   if (mode === "login") {
     if (params.get("reason") === "auth") show("info", "Please log in to continue", "Log in to see your projects and their progress.");
+    if (params.get("reason") === "link") show("error", "That email link has expired or was already used", "If you already confirmed your email, just log in below. Otherwise sign up again to get a fresh link.");
     if (params.get("signedout")) show("success", "You've been logged out", "See you soon!");
     if (params.get("reset") === "done") show("success", "Password updated", "You can now log in with your new password.");
     if (Auth.hasSession() && hashResult.type !== "error") {

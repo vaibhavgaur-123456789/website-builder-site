@@ -63,7 +63,10 @@ $indexable = New-Object System.Collections.Generic.List[string]
 $versions = @{}
 Get-ChildItem -Path (Join-Path $public 'assets') -Recurse -Include *.css, *.js | ForEach-Object {
   $rel = '/' + $_.FullName.Substring($public.Length + 1).Replace('\', '/')
-  $versions[$rel] = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.Substring(0, 10).ToLower()
+  # Hash with normalised line endings so CRLF/LF checkouts produce the same version
+  $text = [IO.File]::ReadAllText($_.FullName).Replace("`r`n", "`n")
+  $sha = [Security.Cryptography.SHA256]::Create()
+  $versions[$rel] = ([BitConverter]::ToString($sha.ComputeHash($utf8.GetBytes($text))) -replace '-', '').Substring(0, 10).ToLower()
 }
 function Version-Assets([string]$html) {
   return [regex]::Replace($html, '(/assets/[\w/.-]+\.(?:css|js))(\?v=[0-9a-f]+)?"', {

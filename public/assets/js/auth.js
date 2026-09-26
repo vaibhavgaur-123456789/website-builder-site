@@ -19,6 +19,8 @@
     over_request_rate_limit: "Too many attempts. Please wait a minute and try again.",
     same_password: "Your new password must be different from the old one.",
     email_send_failed: "We couldn't send the confirmation email just now. Please send your project without an account, or contact me on WhatsApp.",
+    invalid_email: "That email address doesn't look right. Please check it (for example name@gmail.com).",
+    signup_disabled: "New sign-ups are paused right now. You can still send your project without an account.",
     session_expired: "Your session has expired. Please log in again.",
     rate_limit: "You've sent several projects today. Please wait a while or contact me directly.",
     offline: "You seem to be offline. Please check your connection and try again.",
@@ -39,6 +41,8 @@
     if (code === "weak_password" || msg.indexOf("password should") > -1) return "weak_password";
     if (code === "same_password" || msg.indexOf("different from the old") > -1) return "same_password";
     if (code === "email_address_not_authorized" || code === "unexpected_failure" && msg.indexOf("email") > -1 || msg.indexOf("error sending") > -1 || msg.indexOf("not authorized") > -1) return "email_send_failed";
+    if (code === "email_address_invalid" || code === "validation_failed" && msg.indexOf("email") > -1 || msg.indexOf("invalid format") > -1) return "invalid_email";
+    if (code === "signup_disabled" || code === "email_provider_disabled") return "signup_disabled";
     if (code === "over_email_send_rate_limit" || msg.indexOf("email rate") > -1) return "over_email_send_rate_limit";
     if (msg.indexOf("rate_limit") > -1) return "rate_limit";
     if (status === 429) return "over_request_rate_limit";
@@ -83,10 +87,22 @@
       return res.text().then(function (text) {
         var data = null;
         try { data = text ? JSON.parse(text) : null; } catch (e) { data = null; }
-        if (!res.ok) throw new AuthError(errorCode(res.status, data));
+        if (!res.ok) {
+          var err = new AuthError(errorCode(res.status, data));
+          // Unrecognised errors show a short reference so the owner can look it up in Supabase → Logs
+          if (err.code === "generic") {
+            var ref = (data && (data.error_code || data.code || data.error)) || res.status;
+            err.message += " (ref: " + String(ref).slice(0, 40) + ")";
+          }
+          throw err;
+        }
         return data;
       });
-    }, function () { throw new AuthError(navigator.onLine ? "generic" : "offline"); });
+    }, function () {
+      var err = new AuthError(navigator.onLine ? "generic" : "offline");
+      if (err.code === "generic") err.message += " (ref: network)";
+      throw err;
+    });
   }
 
   var refreshing = null;

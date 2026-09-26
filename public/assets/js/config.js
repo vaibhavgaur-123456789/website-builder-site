@@ -13,5 +13,7 @@ window.VWS_CONFIG = Object.freeze({
   whatsapp: "918595375361",
   phoneDisplay: "+91 85953 75361",
   supabaseUrl: "https://ioekjezivvesclpgfhbj.supabase.co",
-  supabaseAnonKey: "sb_publishable_AgQNler4fTmPZxoXeU6YWA_sywXS5Z3"
+  supabaseAnonKey: "sb_publishable_AgQNler4fTmPZxoXeU6YWA_sywXS5Z3",
+  // Requests go through this site (functions/sb) because some Indian ISPs block *.supabase.co
+  supabaseProxy: "/sb"
 });

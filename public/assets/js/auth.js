@@ -5,10 +5,12 @@
 (function () {
   "use strict";
   var CONFIG = window.VWS_CONFIG || {};
-  var BASE = (CONFIG.supabaseUrl || "").replace(/\/+$/, "");
+  var PROJECT_URL = (CONFIG.supabaseUrl || "").replace(/\/+$/, "");
   var KEY = CONFIG.supabaseAnonKey || "";
   var SESSION_KEY = "vws:session";
-  var enabled = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(BASE) && KEY.length > 20;
+  var enabled = /^https:\/\/[a-z0-9-]+\.supabase\.co$/i.test(PROJECT_URL) && KEY.length > 20;
+  // Same-origin proxy path when configured (see functions/sb), otherwise Supabase directly
+  var BASE = /^\/[a-z0-9-]+$/i.test(CONFIG.supabaseProxy || "") ? CONFIG.supabaseProxy : PROJECT_URL;
 
   var FRIENDLY = {
     invalid_credentials: "That email and password don't match. Please try again.",

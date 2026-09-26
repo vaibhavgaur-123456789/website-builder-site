@@ -18,6 +18,7 @@
     over_email_send_rate_limit: "Too many emails were sent recently. Please wait a few minutes and try again.",
     over_request_rate_limit: "Too many attempts. Please wait a minute and try again.",
     same_password: "Your new password must be different from the old one.",
+    email_send_failed: "We couldn't send the confirmation email just now. Please send your project without an account, or contact me on WhatsApp.",
     session_expired: "Your session has expired. Please log in again.",
     rate_limit: "You've sent several projects today. Please wait a while or contact me directly.",
     offline: "You seem to be offline. Please check your connection and try again.",
@@ -37,6 +38,7 @@
     if (code === "user_already_exists" || msg.indexOf("already registered") > -1) return "user_already_exists";
     if (code === "weak_password" || msg.indexOf("password should") > -1) return "weak_password";
     if (code === "same_password" || msg.indexOf("different from the old") > -1) return "same_password";
+    if (code === "email_address_not_authorized" || code === "unexpected_failure" && msg.indexOf("email") > -1 || msg.indexOf("error sending") > -1 || msg.indexOf("not authorized") > -1) return "email_send_failed";
     if (code === "over_email_send_rate_limit" || msg.indexOf("email rate") > -1) return "over_email_send_rate_limit";
     if (msg.indexOf("rate_limit") > -1) return "rate_limit";
     if (status === 429) return "over_request_rate_limit";

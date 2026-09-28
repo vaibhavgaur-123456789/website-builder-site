@@ -51,6 +51,7 @@ $org = [ordered]@{
 }
 
 $services = @(
+  @('Starter one-page website', 'A quick single page built from a ready design, with your text, logo and photos added in.', 999),
   @('Landing page', 'One focused page for an offer, event, product launch or ad campaign.', 4999),
   @('Portfolio / personal brand website', 'Websites for photographers, designers, creators, coaches and professionals.', 5999),
   @('Business / service website', 'A complete website for shops, clinics, salons, coaching centres, builders and local services.', 9999),

@@ -822,3 +822,6 @@ body.menu-open { overflow: hidden; }
 .nav-account { display: none; font-weight: 600; font-size: .9375rem; text-decoration: none; padding: 8px 12px; border-radius: 999px; color: var(--ink-2); }
 .nav-account:hover { color: var(--accent); background: var(--accent-soft); }
 @media (min-width: 1080px) { .nav-account { display: inline-flex; } }
+.lang-link { display: none; align-items: center; justify-content: center; min-width: 40px; height: 34px; padding: 0 10px; font-weight: 700; font-size: .8125rem; letter-spacing: .02em; text-decoration: none; border-radius: 999px; color: var(--ink-2); border: 1.5px solid var(--line-strong); }
+.lang-link:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+@media (min-width: 1080px) { .lang-link { display: inline-flex; } }

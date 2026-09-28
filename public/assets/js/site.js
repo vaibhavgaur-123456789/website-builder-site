@@ -63,6 +63,19 @@
       });
     }
 
+    // Language switcher: send visitors to the same page in the other language when it exists,
+    // otherwise fall back to the homepage of that language (the link's default href in HTML).
+    // Add more entries here as more Hindi (or other language) pages ship.
+    var LANG_MAP = { "/": "/hi/" };
+    var REVERSE_LANG_MAP = {};
+    Object.keys(LANG_MAP).forEach(function (k) { REVERSE_LANG_MAP[LANG_MAP[k]] = k; });
+    var path = window.location.pathname;
+    if (path.length > 1 && path.charAt(path.length - 1) === "/" && path !== "/hi/") path = path.slice(0, -1);
+    var counterpart = LANG_MAP[path] || REVERSE_LANG_MAP[path];
+    if (counterpart) {
+      document.querySelectorAll("[data-lang-switch]").forEach(function (a) { a.href = counterpart; });
+    }
+
     document.querySelectorAll("[data-year]").forEach(function (el) {
       el.textContent = String(new Date().getFullYear());
     });

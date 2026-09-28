@@ -35,6 +35,10 @@ $breadcrumbNames = @{
   privacy = 'Privacy Policy'; terms = 'Terms & Conditions'
 }
 
+# English slug -> Hindi slug, for every page that has a translated /hi/ counterpart.
+# Add a line here (and the matching public/hi/<slug>.html file) as more pages are translated.
+$i18n = @{ '' = 'hi' }
+
 $org = [ordered]@{
   '@type' = 'Organization'
   '@id' = "$SiteUrl/#organization"
@@ -83,17 +87,27 @@ Get-ChildItem -Path (Join-Path $public 'demos') -Filter *.html | ForEach-Object 
 }
 
 # Search-engine verification files (e.g. google123abc.html) are copied as-is, never processed
-Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^google[0-9a-f]+\.html$' } | ForEach-Object {
+$hiDir = Join-Path $public 'hi'
+$pages = @(Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^google[0-9a-f]+\.html$' })
+if (Test-Path $hiDir) { $pages += Get-ChildItem -Path $hiDir -Filter *.html }
+
+$pages | ForEach-Object {
   $file = $_
+  $isHi = $file.DirectoryName -eq $hiDir
   $html = [IO.File]::ReadAllText($file.FullName)
-  $slug = if ($file.BaseName -eq 'index') { '' } else { $file.BaseName }
-  $url = if ($slug) { "$SiteUrl/$slug" } else { "$SiteUrl/" }
+  $slug = if ($file.BaseName -eq 'index') { if ($isHi) { 'hi' } else { '' } } else { if ($isHi) { "hi/$($file.BaseName)" } else { $file.BaseName } }
+  $url = if ($slug -eq '') { "$SiteUrl/" } elseif ($slug -eq 'hi') { "$SiteUrl/hi/" } else { "$SiteUrl/$slug" }
   $noindex = $html -match 'name="robots" content="noindex"'
 
-  # Shared partials
-  foreach ($name in $blocks.Keys) {
+  # Shared partials — a /hi/ page gets the Hindi header/footer when one exists
+  $pageBlocks = $blocks.Clone()
+  if ($isHi) {
+    if ($blocks.ContainsKey('header.hi')) { $pageBlocks['header'] = $blocks['header.hi'] }
+    if ($blocks.ContainsKey('footer.hi')) { $pageBlocks['footer'] = $blocks['footer.hi'] }
+  }
+  foreach ($name in $pageBlocks.Keys) {
     $pattern = "(?s)<!-- @$name -->.*?<!-- /@$name -->"
-    $replacement = "<!-- @$name -->`n" + $blocks[$name] + "`n<!-- /@$name -->"
+    $replacement = "<!-- @$name -->`n" + $pageBlocks[$name] + "`n<!-- /@$name -->"
     $html = [regex]::Replace($html, $pattern, { param($m) $replacement })
   }
 
@@ -110,7 +124,7 @@ Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^
     $seo.Add("<link rel=`"canonical`" href=`"$url`">")
     $seo.Add('<meta property="og:type" content="website">')
     $seo.Add('<meta property="og:site_name" content="Vaibhav Web Studio">')
-    $seo.Add('<meta property="og:locale" content="en_IN">')
+    $seo.Add('<meta property="og:locale" content="' + $(if ($isHi) { 'hi_IN' } else { 'en_IN' }) + '">')
     $seo.Add("<meta property=`"og:title`" content=`"$(Esc $title)`">")
     $seo.Add("<meta property=`"og:description`" content=`"$(Esc $desc)`">")
     $seo.Add("<meta property=`"og:url`" content=`"$url`">")
@@ -122,6 +136,18 @@ Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^
     $seo.Add("<meta name=`"twitter:title`" content=`"$(Esc $title)`">")
     $seo.Add("<meta name=`"twitter:description`" content=`"$(Esc $desc)`">")
     $seo.Add("<meta name=`"twitter:image`" content=`"$SiteUrl/assets/img/og-image.jpg`">")
+
+    # Language alternates: point English <-> Hindi versions of the same page at each other
+    $enSlug = $null; $hiSlug = $null
+    if ($i18n.ContainsKey($slug)) { $enSlug = $slug; $hiSlug = $i18n[$slug] }
+    else { foreach ($k in $i18n.Keys) { if ($i18n[$k] -eq $slug) { $enSlug = $k; $hiSlug = $slug } } }
+    if ($null -ne $hiSlug) {
+      $enUrl = if ($enSlug -eq '') { "$SiteUrl/" } else { "$SiteUrl/$enSlug" }
+      $hiUrl = if ($hiSlug -eq 'hi') { "$SiteUrl/hi/" } else { "$SiteUrl/$hiSlug" }
+      $seo.Add("<link rel=`"alternate`" hreflang=`"en`" href=`"$enUrl`">")
+      $seo.Add("<link rel=`"alternate`" hreflang=`"hi`" href=`"$hiUrl`">")
+      $seo.Add("<link rel=`"alternate`" hreflang=`"x-default`" href=`"$enUrl`">")
+    }
 
     $graph = New-Object System.Collections.Generic.List[object]
     if (-not $slug) {
@@ -180,7 +206,7 @@ Get-ChildItem -Path $public -Filter *.html | Where-Object { $_.Name -notmatch '^
   $html = [regex]::Replace($html, '(?s)<!-- @seo -->.*?<!-- /@seo -->', { param($m) $seoBlock })
 
   # Mark the current page in navigation
-  $navSlug = if ($slug) { "/$slug" } else { '/' }
+  $navSlug = if ($slug -eq '') { '/' } elseif ($slug -eq 'hi') { '/hi/' } else { "/$slug" }
   $html = $html.Replace('<a href="' + $navSlug + '">', '<a href="' + $navSlug + '" aria-current="page">')
   $html = Version-Assets $html
 
